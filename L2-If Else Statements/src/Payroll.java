@@ -43,8 +43,9 @@ public class Payroll {
         return (40 * rate) + (overtime * (rate * 1.5));
     }
 
-    public static void input(String prompt) {
-        Double.parseDouble(JOptionPane.showInputDialog(prompt));
+    public static double input(String prompt) {
+       return Double.parseDouble(JOptionPane.showInputDialog(prompt));
+
     }
     public static void output (double wage){
         DecimalFormat round = new DecimalFormat("$#.###.00");
