@@ -1,3 +1,7 @@
+
+
+import javax.swing.*;
+
 public class ShippingCosts {
 
     /*
@@ -21,6 +25,43 @@ public class ShippingCosts {
 
     As always, your program should include a method.
      */
+    public static void main(String[] args) {
+        int miles = Integer.parseInt(JOptionPane.showInputDialog("How many miles has the packaged been shipped?"));
+        double weightInPounds = Double.parseDouble(JOptionPane.showInputDialog("How much does your item weigh?"));
+        double rate;
+        double cost;
+
+        if (weightInPounds >= 10){
+            rate = 4.80;
+        }else{
+            if (weightInPounds >= 6){
+                rate = 3.70;
+
+            }else{
+                if (weightInPounds >= 2){
+                    rate = 2.20;
+
+                }else{
+                    rate = 1.10;
+
+                }
+
+            }
+        }
+
+        cost = price(rate, miles);
+        JOptionPane.showMessageDialog(null, "The cost is: " + cost);
 
 
+    }
+
+
+        public static double price (double rate, double miles) {
+            int hundredMiles = (int) (miles /100);
+
+            if (hundredMiles == 0){
+                hundredMiles = 1;
+            }
+        return rate * hundredMiles;
+    }
 }
