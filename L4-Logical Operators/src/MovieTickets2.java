@@ -1,4 +1,4 @@
-public class MovieTickets {
+public class MovieTickets2 {
 
     /*
     The local Movie Theater has the following price structure:
