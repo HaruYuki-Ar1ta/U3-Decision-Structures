@@ -1,3 +1,5 @@
+import jdk.nashorn.internal.scripts.JO;
+
 import javax.swing.*;
 import java.util.Random;
 
@@ -8,15 +10,30 @@ public class QuizGame {
     static String display = "";
 
     public static void main(String[] args) {
-        int choice = input("Choose: Addition(1), Subtraction(2), Multiply(3), or Division(4)");
-            create(choice);
+        create();
+        getUserAnswer();
+        check();
+
+        System.out.println(correctAnswer + "\n" + display);
 
         }
 
-        System.out.println(correctAnswer + "\n" + display);
-    }
+        public static void getUserAnswer(){
 
-    public static void create(int choice) {
+        usersAnswer = input(display);
+
+        }
+        public static void check(){
+        if (usersAnswer == correctAnswer){
+            JOptionPane.showMessageDialog(null, "You are correct");
+        }else{
+            JOptionPane.showMessageDialog(null, "Incorrect, try again");
+        }
+
+        }
+    public static void create() {
+        int choice = input("Choose: Addition(1), Subtraction(2), Multiply(3), or Division(4)");
+
         if (choice >= 1) {
 
             if (choice < 5) {
