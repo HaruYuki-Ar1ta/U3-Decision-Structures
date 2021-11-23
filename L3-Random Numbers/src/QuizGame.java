@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class QuizGame {
@@ -7,12 +9,12 @@ public class QuizGame {
     static double usersAnswer, correctAnswer;
     static String display = "";
 
-    JPanel panel;
-    JButton createProblems, checkAnswer;
-    JLabel showProblems, results;
-    JTextField answerInput;
-    JRadioButton addition, subtraction, multiplication, division;
-    ButtonGroup radios = new ButtonGroup();
+    static JPanel panel;
+    static JButton createProblems, checkAnswer;
+    static JLabel showProblems, results;
+    static JTextField answerInput;
+    static JRadioButton addition, subtraction, multiplication, division;
+    static ButtonGroup radios = new ButtonGroup();
 
     public static void main(String[] args) {
       new QuizGame();
@@ -27,7 +29,7 @@ public class QuizGame {
 
         public QuizGame() {
             JFrame frame = new JFrame("Quiz Game");
-            frame.setSize(300, 450);
+            frame.setSize(450, 450);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLocationRelativeTo(null);
 
@@ -38,22 +40,37 @@ public class QuizGame {
             multiplication = new JRadioButton("Multiplication");
             division = new JRadioButton("Division");
             createProblems = new JButton("Make problem");
-            showProblems = new JLabel(" ");
-            results = new JLabel(" ");
+            showProblems = new JLabel("PlaceHolder ");
+            results = new JLabel("Results: ");
             answerInput = new JTextField(10);
             checkAnswer = new JButton("Check answer");
 
-            addition.setBounds(50, 25, 200, 25);
+            addition.setBounds(50, 25, 150, 25);
             subtraction.setBounds(50, 50, 200, 25);
             multiplication.setBounds(50, 75, 200, 25);
             division.setBounds(50, 100, 200, 25);
+            createProblems.setBounds(200, 25, 200, 25);
+            showProblems.setBounds(50, 150, 200, 25);
+            answerInput.setBounds(50, 175, 200, 25);
+            checkAnswer.setBounds(50, 200, 200, 25);
+            results.setBounds(50, 225, 200, 25);
+
+            addition.setSelected(true);
 
             radios.add(addition);
             radios.add(subtraction);
             radios.add(multiplication);
             radios.add(division);
 
+            createProblems.addActionListener(new NewProblemButton());
+            checkAnswer.addActionListener(new CheckProb());
+
             panel.setLayout(null);
+            panel.add(checkAnswer);
+            panel.add(answerInput);
+            panel.add(results);
+            panel.add(showProblems);
+            panel.add(createProblems);
             panel.add(addition);
             panel.add(subtraction);
             panel.add(multiplication);
@@ -66,17 +83,48 @@ public class QuizGame {
 
         }
 
+        private class NewProblemButton implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (addition.isSelected()) {
+                    addition();
+                }
+                if (subtraction.isSelected()) {
+                    subtraction();
+                }
+                if (multiplication.isSelected()) {
+                    multiply();
+                }
+                if (division.isSelected()) {
+                    division();
+                }
+
+                showProblems.setText(display);
+                panel.remove(createProblems);
+                panel.updateUI();
+
+            }
+        }
+            private class CheckProb implements ActionListener{
+                @Override
+                public void actionPerformed(ActionEvent actionEvent){
+                    getUserAnswer();
+                    check();
+                }
+            }
 
         public static void getUserAnswer(){
 
-        usersAnswer = input(" ");
+        usersAnswer = Double.parseDouble(answerInput.getText());
 
         }
         public static void check(){
         if (usersAnswer == correctAnswer){
-            JOptionPane.showMessageDialog(null, "You are correct");
+            results.setText("You are correct!");
+            panel.add(createProblems);
+            panel.updateUI();
         }else{
-            JOptionPane.showMessageDialog(null, "Incorrect, try again");
+            results.setText("Incorrect");
         }
 
         }
