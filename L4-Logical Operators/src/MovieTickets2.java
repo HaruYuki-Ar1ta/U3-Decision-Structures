@@ -16,5 +16,22 @@ public class MovieTickets2 {
 
      */
 
+    static int day;
+    static double time;
+    static double ticketPrice;
+    static int ageGroup;
+
+
+    public static void main(String[] args) {
+
+
+    }
+    public static void ticketPrice(){
+        if (time >= 17 && (day == 5 || day == 6)){
+            ticketPrice = 10.00;
+
+        }
+
+    }
 
 }
