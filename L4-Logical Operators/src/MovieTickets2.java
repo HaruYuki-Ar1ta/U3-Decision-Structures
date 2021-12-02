@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class MovieTickets2 {
 
     /*
@@ -16,22 +18,61 @@ public class MovieTickets2 {
 
      */
 
-    static int day;
-    static double time;
-    static double ticketPrice;
-    static int ageGroup;
 
 
     public static void main(String[] args) {
+        int time = 20;
+       int numChild, numAdult, numSenior;
 
 
+        String day = "saturday";
+        day = day.toLowerCase();
+
+        double ticketPrice = ticketPrice(time, day);
+
+        System.out.println(ticketPrice);
     }
-    public static void ticketPrice(){
-        if (time >= 17 && (day == 5 || day == 6)){
+
+        public static double ticketPrice(int time, String day){
+
+        double ticketPrice = 0;
+
+        if (time >= 17 && (day.equals("friday") || day.equals("saturday"))){
             ticketPrice = 10.00;
 
+        }else if(time >= 17){
+            ticketPrice = 8.00;
+        }else{
+            ticketPrice = 7.00;
+        }
+        return ticketPrice;
+    }
+
+    public static double findChildPrice(int time, String day) {
+       double ticketPrice =0;
+        if (time >= 17 && (day.equals("friday") || day.equals("saturday"))){
+            ticketPrice = 10.00;
+
+        }else if(time >= 17){
+            ticketPrice = 8.00;
+        }else{
+            ticketPrice = 7.00;
+        }
+        return ticketPrice *= .50;
+    }
+    public static double findSeniorPrice(int time, String day){
+            double ticketPrice = 0;
+            if (time >= 17 && (day.equals("friday") || day.equals("saturday"))){
+                ticketPrice = 10.00;
+
+            }else if(time >= 17){
+                ticketPrice = 8.00;
+            }else{
+                ticketPrice = 7.00;
+            }
+            return ticketPrice *= .50;
         }
 
     }
 
-}
+
